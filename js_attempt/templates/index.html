@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>sabaplaylist</title>
+
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+
+	<script src="https://kit.fontawesome.com/497ef235da.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<!--Header-->
+	<div id="header-element" class="header">
+		<a class="logo" href="">sabaplaylist</a>
+		<div class="header-right" style="padding-right: 10vw;">
+			<a href="/">about</a>
+			<a href="/login/logout">donate</a>
+		</div>
+	</div>
+	
+	<!--Compatibility-->
+	<div class="compatibility">
+		<p style="font-size: 1vw; margin-right: 1vw; color: #424242">compatible platforms:</p>
+		<i class="fa-brands fa-spotify"></i>
+		<i class="fa-brands fa-soundcloud"></i>
+		<i class="fa-brands fa-youtube"></i>
+	</div>
+
+	<!--Searchbar-->
+	<div class="search-holder">
+		<input type="text" name="" class="search" placeholder="playlist link" id="search_input">
+
+		<button class="search-button" id="search" onclick="select_search()">
+			<div class="box">
+				<i class="fa-solid fa-magnifying-glass"></i>
+			</div>
+		</button>
+	</div>
+
+	<!--Loaded Playlist-->
+	<div class="playlist-info">
+		<p style="font-size: 1vw; margin-right: 1vw; color: #424242">name: ?</p>
+		<p style="font-size: 1vw; margin-right: 1vw; color: #424242">tracks: ?</p>
+		<p style="font-size: 1vw; margin-right: 1vw; color: #424242">length: ?</p>
+	</div>
+
+	<!--Functions-->
+	<div class="playlist-functions">
+		<button class="download" onclick="">
+			<div class="box">
+				<p>download</p>
+			</div>
+		</button>
+		<button class="export" onclick="">
+			<div class="box">
+				<p>export</p>
+			</div>
+		</button>
+	</div>
+
+	<!--Scripts-->
+	<script src="js/habits-graph-vis.js"></script>
+</body>
+</html>

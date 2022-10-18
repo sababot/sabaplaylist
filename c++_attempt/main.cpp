@@ -42,8 +42,7 @@ int main()
         // export command
         if (words[0] == "export")
         {
-            cout << words[1] << endl;
-            //export_spotify(words[1]);
+            export_spotify_playlist(words[1]);
         }
     }
     
