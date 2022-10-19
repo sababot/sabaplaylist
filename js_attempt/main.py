@@ -2,7 +2,7 @@ import string
 import random
 import csv
 
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_file
 
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -34,12 +34,12 @@ def export(playlist_id):
 @app.route('/')
 def index():
     #6RjXi4FCPU0T6GoSmX58Wu
-    export("6RjXi4FCPU0T6GoSmX58Wu")
     return render_template('index.html')
 
-@app.route('/export_playlist')
+@app.route('/export_playlist/<playlist_id>', methods = ['GET', 'POST'])
 def export_playlist(playlist_id):
     export(playlist_id)
+    return send_file("playlist.csv", as_attachment=True)
 
 if __name__ == '__main__':
     app.run()
