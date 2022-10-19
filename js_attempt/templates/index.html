@@ -6,6 +6,7 @@
 	<title>sabaplaylist</title>
 
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+	<link rel="shortcut icon" type="image/x-icon" href="../static/images/sabaplaylist-logo.png"/>
 
 	<script src="https://kit.fontawesome.com/497ef235da.js" crossorigin="anonymous"></script>
 </head>
@@ -47,12 +48,12 @@
 
 	<!--Functions-->
 	<div class="playlist-functions">
-		<button class="download" onclick="">
+		<button class="download" id="export" onclick="">
 			<div class="box">
 				<p>download</p>
 			</div>
 		</button>
-		<button class="export" onclick="">
+		<button class="export" id="export" onclick="export_playlist()">
 			<div class="box">
 				<p>export</p>
 			</div>
@@ -60,6 +61,6 @@
 	</div>
 
 	<!--Scripts-->
-	<script src="js/habits-graph-vis.js"></script>
+	<script src="../static/js/spotify_functions.js"></script>
 </body>
 </html>
