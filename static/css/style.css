@@ -9,7 +9,7 @@ body {
 
 .compatibility {
     display: flex;
-    margin-top: 20vh;
+    margin-top: 25vh;
     margin-left: 31vw;
 }
 
@@ -244,4 +244,11 @@ body {
     padding-left: 2.75vw;
     padding-top: 0.5vw;
   }
+}
+
+.footer {
+    position: fixed;
+    bottom: 1vh;
+    left: 41.5vw;
+    color: #757575;
 }

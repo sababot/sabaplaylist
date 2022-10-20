@@ -32,7 +32,7 @@
 	<div class="search-holder">
 		<input type="text" name="" class="search" placeholder="playlist link" id="search_input">
 
-		<button class="search-button" id="search" onclick="select_search()">
+		<button class="search-button" id="search" onclick="load_playlist();">
 			<div class="box">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</div>
@@ -41,9 +41,9 @@
 
 	<!--Loaded Playlist-->
 	<div class="playlist-info">
-		<p style="font-size: 1vw; margin-right: 1vw; color: #424242">name: ?</p>
-		<p style="font-size: 1vw; margin-right: 1vw; color: #424242">tracks: ?</p>
-		<p style="font-size: 1vw; margin-right: 1vw; color: #424242">length: ?</p>
+		<p style="font-size: 1vw; margin-right: 1vw; color: #424242" id="playlist_loaded">loaded: ?</p>
+		<p style="font-size: 1vw; margin-right: 1vw; color: #424242" id="playlist_tracks">tracks: ?</p>
+		<!--<p style="font-size: 1vw; margin-right: 1vw; color: #424242" id="playlist_length">length: ?</p>-->
 	</div>
 
 	<!--Functions-->
@@ -58,7 +58,17 @@
 				<p>export</p>
 			</div>
 		</button>
+		<a href="/">
+			<button class="export" id="export" onclick="">
+				<div class="box">
+					<p>new playlist</p>
+				</div>
+			</button>
+		</a>
 	</div>
+
+	<!--Footer-->
+	<p class="footer">© 2022, Aitor Garcia Hombrados</p>
 
 	<!--Scripts-->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
