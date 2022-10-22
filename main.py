@@ -2,6 +2,8 @@ import string
 import random
 import csv
 import time
+import os
+from zipfile import ZipFile
 
 from flask import Flask, render_template, request, redirect, url_for, session, send_file, jsonify
 
@@ -20,6 +22,7 @@ playlist_loaded = 0
 playlist = None
 playlist_name = ""
 playlist_tracks = 0
+playlist_downloaded = 0
 
 def load(playlist_id):
     global playlist
@@ -32,28 +35,45 @@ def load(playlist_id):
     playlist_tracks = len(playlist['items'])
 
 def export(playlist_id):
-    playlist_tracks = playlist['items']
+    playlist_songs = playlist['items']
 
     tracks = [["index", "name", "album", "artist"]]
 
-    for i in range(len(playlist_tracks)):
-        tracks.append([i, playlist_tracks[i]['track']['name'],
-                          playlist_tracks[i]['track']['album']['name'],
-                          playlist_tracks[i]['track']['artists'][0]['name']])
+    for i in range(len(playlist_songs)):
+        tracks.append([i, playlist_songs[i]['track']['name'],
+                          playlist_songs[i]['track']['album']['name'],
+                          playlist_songs[i]['track']['artists'][0]['name']])
 
-    with open ('playlist.csv','w',newline = '') as csvfile:
+    with open ('data/playlist.csv','w',newline = '') as csvfile:
         my_writer = csv.writer(csvfile, delimiter = ',')
         my_writer.writerows(tracks)
+
+def download(playlist_id):
+    playlist_songs = playlist['items']
+
+    global playlist_downloaded
+    #playlist_songs[0]['track']['external_urls']['spotify'] URL OF TRACK
+    
+    for i in range(len(playlist_songs)):
+        os.system("cd data/playlist && spotdl " + playlist_songs[i]['track']['external_urls']['spotify'])
+        playlist_downloaded += 1
+
+    dirs = os.listdir("data/playlist")
+
+    zf = ZipFile('playlist.zip', "w")
+    for file in dirs:
+        zf.write("data/playlist/" + file)
 
 # Routes
 @app.route('/')
 def index():
     #6RjXi4FCPU0T6GoSmX58Wu
+    #4VtNogIZ8h7PSIR1RMhnCa
     return render_template('index.html')
 
 @app.route('/get_vars', methods = ['GET', 'POST'])
 def get_vars():
-    return jsonify({'playlist_loaded': playlist_loaded, 'playlist_name': playlist_name, 'playlist_tracks': playlist_tracks, 'playlist_length': playlist_length})
+    return jsonify({'playlist_loaded': playlist_loaded, 'playlist_name': playlist_name, 'playlist_tracks': playlist_tracks, 'playlist_downloaded': playlist_downloaded})
 
 @app.route('/load_playlist/<playlist_id>', methods = ['GET', 'POST'])
 def load_playlist(playlist_id):
@@ -64,9 +84,16 @@ def load_playlist(playlist_id):
 def export_playlist(playlist_id):
     if playlist_loaded == True:
         export(playlist_id)
-        return send_file("playlist.csv", as_attachment=True)
+        return send_file("data/playlist.csv", as_attachment=True)
     else:
         return ""
+
+@app.route('/download_playlist/<playlist_id>', methods = ['GET', 'POST'])
+def download_playlist(playlist_id):
+    if playlist_loaded == True:
+        download(playlist_id)
+    
+    return send_file("playlist.zip", as_attachment=True)
 
 @app.route('/new_playlist', methods = ['GET', 'POST'])
 def new_playlist(playlist_id):
@@ -74,11 +101,13 @@ def new_playlist(playlist_id):
     global playlist_loaded
     global playlist_tracks
     global playlist_name
+    global playlist_downloaded
 
     playlist = None
     playlist_loaded = 0
     playlist_tracks = 0
     playlist_name = ""
+    playlist_downloaded = 0
 
     return ""
 

@@ -1,17 +1,18 @@
 var playlist_loaded = 0;
 var playlist_tracks = 0;
-var playlist_length = "";
 var playlist_name = "";
+var playlist_downloaded = 0;
 
 function get_variables() {
   $.getJSON('/get_vars', function(data) {
     playlist_loaded = data.playlist_loaded;
     playlist_tracks = data.playlist_tracks;
-    playlist_lengths = data.playlist_length;
+    playlist_downloaded = data.playlist_downloaded;
     playlist_name = data.playlist_name;
   });
 
   document.getElementById("playlist_tracks").innerHTML = "tracks: " + playlist_tracks;
+  document.getElementById("playlist_downloaded").innerHTML = "downloaded: " + playlist_downloaded + "/" + playlist_tracks;
 
   if (playlist_loaded == 1)
     document.getElementById("playlist_loaded").innerHTML = "loaded: true";
@@ -42,7 +43,16 @@ function export_playlist() {
 
   if (playlist_loaded == 1) {
     window.location.href = '/export_playlist/' + playlist_id;
-    $.getJSON('/export_playlist/' + playlist_id, function(data) {
+  }
+}
+
+function download_playlist() {
+  var playlist_id = document.getElementById("search_input").value;
+  
+  const interval = setInterval(get_variables, 1000);
+
+  if (playlist_loaded == 1) {
+    $.getJSON('/download_playlist/' + playlist_id, function(data) {
       // do nothing
     });
   }
