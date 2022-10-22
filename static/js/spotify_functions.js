@@ -52,9 +52,7 @@ function download_playlist() {
   const interval = setInterval(get_variables, 1000);
 
   if (playlist_loaded == 1) {
-    $.getJSON('/download_playlist/' + playlist_id, function(data) {
-      // do nothing
-    });
+    window.location.href = '/download_playlist/' + playlist_id;
   }
 }
 
