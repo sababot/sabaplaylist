@@ -106,9 +106,26 @@ body {
     color: inherit;
 }
 
+.progress-container {
+    margin-left: 30.75vw;
+    background-color: #757575;
+    width: 39.25vw;
+    border-radius: 0vw;
+    margin-top: 0.5vw;
+}
+
+.progress {
+    background-color: #ea7917;
+    color: white;
+    padding: 0.15vw;
+    text-align: right;
+    font-size: 20px;
+    border-radius: 0vw;
+    width: 0%;
+}
+
 .wrapper-sections {
     justify-content: center;
-    
     padding-top: 2.5vh;
     padding-bottom: 10vh;
     display: grid;

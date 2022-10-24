@@ -18,6 +18,8 @@ function get_variables() {
     document.getElementById("playlist_loaded").innerHTML = "loaded: true";
   else
     document.getElementById("playlist_loaded").innerHTML = "loaded: false";
+
+  document.getElementById("progress").style.width = (playlist_downloaded / playlist_tracks) * 100 + "%";
 }
 
 get_variables();
