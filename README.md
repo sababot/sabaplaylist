@@ -4,5 +4,4 @@ this is a simple terminal tool to:
 - download playlists
 - create playlists from csv
 
-# usage
-...
+**it is not running on any server so website currently offline**
